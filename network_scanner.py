@@ -8,7 +8,7 @@ os.system("banner NETSCAN")
 
 
 def main_menu():
-	print("Enter 1 for Scan single host")
+	print("\nEnter 1 for Scan single host")
 	print("Enter 2 for scan range")
 	print("Enter 3 for Scan network")
 	print("Enter 4 for Agressive scan")
@@ -25,8 +25,9 @@ def scan_single_host():
 		scan = nm.scan(hosts=ip_address,ports="1-2000",arguments = "-v -sS -O -Pn") #Returns Dictionary
 		print(scan)
 		#print(scan['scan'][ip]['addresses']['mac'])
+		print("________single_host__________")
 		for port in scan["scan"][ip_address]['tcp'].items():
-			print(f"{port[0]}, {port[1]['state']} , {port[1]['name']}")
+			print(f"{port[0]}, {port[1]['state']},{port[1]['reason']} , {port[1]['name']}")
 	except:
 		print("Use root priviliege")
 def scan_range():
@@ -80,7 +81,7 @@ def scan_all_port_only():
 	ip_address = input("\tEnter the IP : ")
 	print("Wait........................")
 	try:
-		scan = nm.scan(hosts = ip_address,ports = "1-3",arguments = "-sS -O -Pn")
+		scan = nm.scan(hosts = ip_address,ports = "1-4",arguments = "-sS -O -Pn")
 		for port in scan["scan"][ip_address]['tcp'].items():
 			print(f"{port[0]}, {port[1]['state']} , {port[1]['name']}")
 	except:
